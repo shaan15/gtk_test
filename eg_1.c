@@ -25,8 +25,7 @@ static void row_displayed (GObject *revealer, GParamSpec *pspec, gpointer data){
 }
 
 static GtkWidget * add_row(GtkWidget *button, GtkWidget *newrow){
-  g_timer_reset(time_row);
-  g_timer_start(time_row);
+  
   GtkWidget *revealer, *row, *list;
   gint i;
   row = gtk_widget_get_parent (newrow);
@@ -39,8 +38,7 @@ static GtkWidget * add_row(GtkWidget *button, GtkWidget *newrow){
   g_signal_connect (revealer, "notify::child-revealed",G_CALLBACK (row_displayed), NULL);
   gtk_list_box_insert (GTK_LIST_BOX (list), revealer, i++);
   gtk_revealer_set_reveal_child (GTK_REVEALER (revealer), TRUE);
-  g_timer_stop(time_row);
-  printf("Time to add row: %lf\n",g_timer_elapsed (time_row,&msecs));
+  
   /*g_timer_stop(time_add_row);
   printf("time to add new row: %ld\n",time_add_row);*/
 }
@@ -110,11 +108,15 @@ int main (int argc, char **argv){
   gtk_container_add (GTK_CONTAINER (s), list);
 
   gint i;
+  g_timer_reset(time_row);
+  g_timer_start(time_row);
   for(i=1;i<=2000;i++){
     text=g_strdup_printf("Row %d",i);
     row=create_row(text);
     gtk_list_box_insert(GTK_LIST_BOX(list),row,-1);
   }
+  g_timer_stop(time_row);
+  printf("Time to add row: %lf\n",g_timer_elapsed (time_row,&msecs));
   gtk_widget_show_all(window);
   gtk_main();
 
