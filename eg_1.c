@@ -15,16 +15,6 @@ create_row (const gchar *text)
 }
 
 static void 
-add_separator (GtkListBoxRow *row, 
-               GtkListBoxRow *before,
-               gpointer data)
-{
-  if (!before)
-    return;
-  gtk_list_box_row_set_header (row, gtk_separator_new (GTK_ORIENTATION_HORIZONTAL));
-}
-
-static void 
 next_page (GtkApplication *app)
 {
   time_row=g_timer_new();
@@ -38,7 +28,6 @@ next_page (GtkApplication *app)
 
   list = gtk_list_box_new ();
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
-  gtk_list_box_set_header_func (GTK_LIST_BOX (list), add_separator, NULL, NULL);
   s = gtk_scrolled_window_new (NULL, NULL);
   gtk_container_add (GTK_CONTAINER (window), s);
   gtk_container_add (GTK_CONTAINER (s), list);
