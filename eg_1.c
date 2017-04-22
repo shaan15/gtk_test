@@ -42,11 +42,15 @@ next_page (GtkApplication *app,
   {
     text=g_strdup_printf("Row %d",i);
     row=create_row (text);
+    //gtk_widget_show (row);
     gtk_list_box_insert (GTK_LIST_BOX (list),row,-1);
   }
+  //gtk_widget_show (list);
+  gtk_container_add (GTK_CONTAINER (box),list);
   g_timer_stop (time_row);
   printf ("Time to add row: %lf\n",g_timer_elapsed (time_row,&msecs));
   //gtk_widget_show_all (box);
+
   gtk_main ();
 }
 
