@@ -46,7 +46,7 @@ next_page (GtkApplication *app,
   }
   g_timer_stop (time_row);
   printf ("Time to add row: %lf\n",g_timer_elapsed (time_row,&msecs));
-  gtk_widget_show_all (box);
+  //gtk_widget_show_all (box);
   gtk_main ();
 }
 
@@ -55,7 +55,7 @@ activate (GtkApplication *app,
           gpointer        user_data)
 {
   GtkWidget *window;
-  GtkBox *box;
+  GtkWidget *box;
   GtkWidget *button;
   GtkWidget *button_box;
 
@@ -72,8 +72,8 @@ activate (GtkApplication *app,
   button = gtk_button_new_with_label ("Hello World");
   g_signal_connect (button, "clicked", G_CALLBACK (next_page), &box);
   gtk_container_add (GTK_CONTAINER (button_box), button);
-  //gtk_container_add (GTK_CONTAINER (window), box);
-  gtk_widget_show_all (box);
+  gtk_container_add (GTK_CONTAINER (window), box);
+  gtk_widget_show_all (window);
 }
 
 int main (int argc, 
