@@ -7,4 +7,4 @@ Tasks given by mentor:
 2. Print how long it took to add the 2000 rows.
   (Implemented)
 3. To create a custom widget type. Instead of putting a label in the rows, put a custom widget type that is build using xml templates.
-  (Not done yet)
+  (In Progress)
